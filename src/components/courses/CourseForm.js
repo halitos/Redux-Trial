@@ -13,7 +13,7 @@ const CourseForm = ({
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{course.id ? "Edit" : "Add"} Course</h2>
+      <h2>{course && course.id ? "Edit" : "Add"} Course</h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -22,7 +22,7 @@ const CourseForm = ({
       <TextInput
         name="title"
         label="Title"
-        value={course.title}
+        value={course && course.title}
         onChange={onChange}
         error={errors.title}
       />
@@ -30,7 +30,7 @@ const CourseForm = ({
       <SelectInput
         name="authorId"
         label="Author"
-        value={course.authorId || ""}
+        value={(course && course.authorId) || ""}
         defaultOption="Select Author"
         options={authors.map((author) => ({
           value: author.id,
@@ -43,7 +43,7 @@ const CourseForm = ({
       <TextInput
         name="category"
         label="Category"
-        value={course.category}
+        value={course && course.category}
         onChange={onChange}
         error={errors.category}
       />
@@ -57,7 +57,7 @@ const CourseForm = ({
 
 CourseForm.propTypes = {
   authors: PropTypes.array.isRequired,
-  course: PropTypes.object.isRequired,
+  course: PropTypes.object,
   errors: PropTypes.object,
   onSave: PropTypes.func,
   onChange: PropTypes.func.isRequired,
