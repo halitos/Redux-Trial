@@ -9,11 +9,11 @@ const CourseForm = ({
   onSave,
   onChange,
   saving = false,
-  errors = {},
+  errors = {}
 }) => {
   return (
     <form onSubmit={onSave}>
-      <h2>{course && course.id ? "Edit" : "Add"} Course</h2>
+      <h2>{course.id ? "Edit" : "Add"} Course</h2>
       {errors.onSave && (
         <div className="alert alert-danger" role="alert">
           {errors.onSave}
@@ -22,7 +22,7 @@ const CourseForm = ({
       <TextInput
         name="title"
         label="Title"
-        value={course && course.title}
+        value={course.title}
         onChange={onChange}
         error={errors.title}
       />
@@ -30,11 +30,11 @@ const CourseForm = ({
       <SelectInput
         name="authorId"
         label="Author"
-        value={(course && course.authorId) || ""}
+        value={course.authorId || ""}
         defaultOption="Select Author"
-        options={authors.map((author) => ({
+        options={authors.map(author => ({
           value: author.id,
-          text: author.name,
+          text: author.name
         }))}
         onChange={onChange}
         error={errors.author}
@@ -43,7 +43,7 @@ const CourseForm = ({
       <TextInput
         name="category"
         label="Category"
-        value={course && course.category}
+        value={course.category}
         onChange={onChange}
         error={errors.category}
       />
@@ -57,11 +57,11 @@ const CourseForm = ({
 
 CourseForm.propTypes = {
   authors: PropTypes.array.isRequired,
-  course: PropTypes.object,
+  course: PropTypes.object.isRequired,
   errors: PropTypes.object,
-  onSave: PropTypes.func,
+  onSave: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  saving: PropTypes.bool,
+  saving: PropTypes.bool
 };
 
 export default CourseForm;
